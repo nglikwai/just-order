@@ -3,21 +3,20 @@ import eslintPluginPrettier from 'eslint-plugin-prettier';
 import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
 import typescriptEslintPlugin from '@typescript-eslint/eslint-plugin';
 import typescriptEslintParser from '@typescript-eslint/parser';
+import eslintPluginUnusedImports from 'eslint-plugin-unused-imports';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     ignores: ['node_modules', '.next', 'out'],
-    languageOptions: {
-      parser: typescriptEslintParser,
-      sourceType: 'module',
-    },
+    languageOptions: { parser: typescriptEslintParser, sourceType: 'module' },
     plugins: {
       '@typescript-eslint': typescriptEslintPlugin,
       react: eslintPluginReact,
       prettier: eslintPluginPrettier,
       'simple-import-sort': eslintPluginSimpleImportSort,
+      'unused-imports': eslintPluginUnusedImports,
     },
     rules: {
       // Prettier
@@ -42,9 +41,7 @@ export default [
             'everything-else',
             'rendering',
           ],
-          groups: {
-            rendering: ['/^render.+$/', 'render'],
-          },
+          groups: { rendering: ['/^render.+$/', 'render'] },
         },
       ],
 
@@ -75,11 +72,8 @@ export default [
       // General
       'no-console': 'off',
       'no-debugger': 'warn',
+      'unused-imports/no-unused-imports': 'error',
     },
-    settings: {
-      react: {
-        version: 'detect',
-      },
-    },
+    settings: { react: { version: 'detect' } },
   },
 ];
