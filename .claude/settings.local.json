@@ -1,6 +1,12 @@
 {
   "permissions": {
-    "allow": ["Bash(mkdir:*)", "Bash(mv:*)"],
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run lint:*)",
+      "Bash(find \"/Users/likwai/projects/just-order/src/app\" -name \"*dashboard*\" -o -name \"*business*\")"
+    ],
     "deny": []
   }
 }

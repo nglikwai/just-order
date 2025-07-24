@@ -168,14 +168,14 @@ export default function TrackOrder() {
   };
 
   return (
-    <div className='min-h-screen bg-gray-50'>
+    <div className='min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-50'>
       <div className='max-w-2xl mx-auto px-6 py-8'>
         {/* Header */}
         <div className='text-center mb-8'>
-          <div className='w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4'>
+          <div className='w-16 h-16 bg-gradient-to-br from-slate-100 to-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg'>
             <Search className='w-8 h-8 text-slate-600' />
           </div>
-          <h1 className='text-3xl font-bold text-gray-900 mb-2'>
+          <h1 className='text-3xl sm:text-4xl font-bold text-gray-900 mb-2'>
             Track Your Order
           </h1>
           <p className='text-gray-600'>
@@ -184,11 +184,11 @@ export default function TrackOrder() {
         </div>
 
         {/* Search Methods */}
-        <div className='bg-white rounded-lg border border-gray-200 shadow-sm p-6 mb-6'>
+        <div className='bg-white rounded-3xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 p-6 sm:p-8 mb-8'>
           <div className='flex gap-4 mb-6'>
             <button
               onClick={() => setSearchMethod('phone')}
-              className={`flex-1 p-3 rounded-lg border transition-colors ${
+              className={`flex-1 p-3 rounded-2xl border transition-colors ${
                 searchMethod === 'phone'
                   ? 'bg-slate-50 border-slate-300 text-slate-900'
                   : 'border-gray-200 text-gray-600 hover:bg-gray-50'
@@ -203,7 +203,7 @@ export default function TrackOrder() {
             </button>
             <button
               onClick={() => setSearchMethod('orderId')}
-              className={`flex-1 p-3 rounded-lg border transition-colors ${
+              className={`flex-1 p-3 rounded-2xl border transition-colors ${
                 searchMethod === 'orderId'
                   ? 'bg-slate-50 border-slate-300 text-slate-900'
                   : 'border-gray-200 text-gray-600 hover:bg-gray-50'
@@ -229,7 +229,7 @@ export default function TrackOrder() {
                   type='tel'
                   value={phoneNumber}
                   onChange={e => setPhoneNumber(e.target.value)}
-                  className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-slate-500'
+                  className='w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all duration-200 bg-white/50'
                   placeholder='Enter your phone number'
                 />
                 <p className='text-xs text-gray-500 mt-1'>
@@ -245,7 +245,7 @@ export default function TrackOrder() {
                   type='text'
                   value={orderId}
                   onChange={e => setOrderId(e.target.value)}
-                  className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-slate-500'
+                  className='w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all duration-200 bg-white/50'
                   placeholder='Enter your order ID'
                 />
                 <p className='text-xs text-gray-500 mt-1'>
@@ -255,7 +255,7 @@ export default function TrackOrder() {
             )}
 
             {error && (
-              <div className='flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-800 text-sm'>
+              <div className='flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-2xl text-red-800 text-sm'>
                 <AlertCircle className='w-4 h-4' />
                 {error}
               </div>
@@ -264,7 +264,7 @@ export default function TrackOrder() {
             <Button
               onClick={handleSearch}
               disabled={loading || (!phoneNumber && !orderId)}
-              className='w-full bg-slate-600 hover:bg-slate-700 disabled:opacity-50'
+              className='w-full bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white rounded-xl py-3 font-semibold transform transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-slate-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none'
             >
               {loading ? (
                 <div className='flex items-center gap-2'>
@@ -283,7 +283,7 @@ export default function TrackOrder() {
 
         {/* Recent Orders */}
         {recentOrders.length > 0 && (
-          <div className='bg-white rounded-lg border border-gray-200 shadow-sm p-6'>
+          <div className='bg-white rounded-2xl border border-gray-200 shadow-sm p-6'>
             <h2 className='text-lg font-semibold text-gray-900 mb-4'>
               Recent Orders
             </h2>
@@ -292,7 +292,7 @@ export default function TrackOrder() {
                 <div
                   key={order.orderId}
                   onClick={() => router.push(`/order-placed/${order.orderId}`)}
-                  className='flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors'
+                  className='flex items-center justify-between p-4 sm:p-6 border border-gray-100 rounded-3xl hover:bg-slate-50 cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] bg-white'
                 >
                   <div className='flex items-center gap-3'>
                     {getStatusIcon(order.status)}
@@ -324,7 +324,7 @@ export default function TrackOrder() {
         )}
 
         {/* Help Section */}
-        <div className='text-center mt-8'>
+        <div className='text-center mt-12 p-6 bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-100'>
           <p className='text-gray-600 text-sm'>
             Need help? Contact the business directly or{' '}
             <a

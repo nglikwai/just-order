@@ -2,7 +2,17 @@
 
 import { useState } from 'react';
 
-import { Edit, Plus, Save, Trash2, X } from 'lucide-react';
+import {
+  Edit,
+  Plus,
+  Save,
+  ShoppingBag,
+  Star,
+  Trash2,
+  TrendingUp,
+  Users,
+  X,
+} from 'lucide-react';
 
 import { BusinessSidebar } from '@/components/BusinessSidebar';
 import { Button } from '@/components/components/ui/button';
@@ -79,87 +89,175 @@ export default function BusinessDashboard() {
   };
 
   return (
-    <div className='min-h-screen bg-gray-50 flex'>
+    <div className='min-h-screen bg-gradient-to-br from-gray-50 to-white flex'>
       <BusinessSidebar />
       <div className='flex-1 lg:ml-0'>
-        <div className='max-w-7xl mx-auto px-6 py-8'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8'>
+          {/* Header Section - Airbnb Style */}
           <div className='mb-8 lg:ml-0 ml-16'>
-            <h1 className='text-3xl font-bold text-gray-900 mb-2'>
-              Product Management
-            </h1>
-            <p className='text-gray-600'>Manage your products and menu</p>
-          </div>
+            <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6'>
+              <div>
+                <h1 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2'>
+                  Product Dashboard
+                </h1>
+                <p className='text-gray-600 text-base sm:text-lg'>
+                  Manage your menu and track performance
+                </p>
+              </div>
+              <div className='flex items-center gap-3'>
+                <div className='bg-white rounded-2xl p-3 shadow-sm border border-gray-100'>
+                  <div className='flex items-center gap-2 text-sm'>
+                    <div className='w-2 h-2 bg-green-500 rounded-full animate-pulse' />
+                    <span className='text-gray-600 font-medium'>
+                      Live Orders
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          {/* Add Product Button */}
-          <div className='mb-6 lg:ml-0 ml-16'>
-            {!showAddForm ? (
-              <Button
-                onClick={() => setShowAddForm(true)}
-                className='bg-slate-600 hover:bg-slate-700'
-              >
-                <Plus className='w-4 h-4 mr-2' />
-                Add New Product
-              </Button>
-            ) : (
-              <div className='bg-white p-6 rounded-lg border border-gray-200 shadow-sm'>
-                <h3 className='text-lg font-semibold text-gray-900 mb-4'>
-                  Add New Product
-                </h3>
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
-                  <div>
-                    <label className='block text-sm font-medium text-gray-700 mb-1'>
-                      Product Name
-                    </label>
-                    <input
-                      type='text'
-                      value={newProduct.name || ''}
-                      onChange={e =>
-                        setNewProduct({ ...newProduct, name: e.target.value })
-                      }
-                      className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500'
-                      placeholder='Enter product name'
-                    />
+            {/* Stats Cards */}
+            <div className='grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8'>
+              <div className='bg-white rounded-2xl p-4 sm:p-6 border border-gray-100 hover:shadow-lg transition-all duration-300'>
+                <div className='flex items-center gap-3 mb-2'>
+                  <div className='w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center'>
+                    <ShoppingBag className='w-5 h-5 text-blue-600' />
                   </div>
                   <div>
-                    <label className='block text-sm font-medium text-gray-700 mb-1'>
-                      Price ($)
+                    <p className='text-2xl font-bold text-gray-900'>
+                      {products.length}
+                    </p>
+                    <p className='text-xs text-gray-500'>Products</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className='bg-white rounded-2xl p-4 sm:p-6 border border-gray-100 hover:shadow-lg transition-all duration-300'>
+                <div className='flex items-center gap-3 mb-2'>
+                  <div className='w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center'>
+                    <TrendingUp className='w-5 h-5 text-green-600' />
+                  </div>
+                  <div>
+                    <p className='text-2xl font-bold text-gray-900'>24</p>
+                    <p className='text-xs text-gray-500'>Orders Today</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className='bg-white rounded-2xl p-4 sm:p-6 border border-gray-100 hover:shadow-lg transition-all duration-300'>
+                <div className='flex items-center gap-3 mb-2'>
+                  <div className='w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center'>
+                    <Star className='w-5 h-5 text-amber-600' />
+                  </div>
+                  <div>
+                    <p className='text-2xl font-bold text-gray-900'>4.8</p>
+                    <p className='text-xs text-gray-500'>Rating</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className='bg-white rounded-2xl p-4 sm:p-6 border border-gray-100 hover:shadow-lg transition-all duration-300'>
+                <div className='flex items-center gap-3 mb-2'>
+                  <div className='w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center'>
+                    <Users className='w-5 h-5 text-slate-600' />
+                  </div>
+                  <div>
+                    <p className='text-2xl font-bold text-gray-900'>156</p>
+                    <p className='text-xs text-gray-500'>Customers</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Add Product Section - Airbnb Style */}
+          <div className='mb-8 lg:ml-0 ml-16'>
+            {!showAddForm ? (
+              <div className='flex items-center justify-between'>
+                <h2 className='text-xl font-bold text-gray-900'>
+                  Your Products
+                </h2>
+                <Button
+                  onClick={() => setShowAddForm(true)}
+                  className='bg-gradient-to-r from-slate-500 to-slate-600 hover:from-slate-600 hover:to-slate-700 text-white rounded-xl px-6 py-3 font-semibold transform transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl'
+                >
+                  <Plus className='w-4 h-4 mr-2' />
+                  Add New Product
+                </Button>
+              </div>
+            ) : (
+              <div className='bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-xl'>
+                <div className='flex items-center gap-3 mb-6'>
+                  <div className='w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center'>
+                    <Plus className='w-6 h-6 text-slate-600' />
+                  </div>
+                  <div>
+                    <h3 className='text-xl font-bold text-gray-900'>
+                      Add New Product
+                    </h3>
+                    <p className='text-gray-600'>
+                      Create a new item for your menu
+                    </p>
+                  </div>
+                </div>
+
+                <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6'>
+                  <div className='space-y-4'>
+                    <div>
+                      <label className='block text-sm font-semibold text-gray-800 mb-2'>
+                        Product Name
+                      </label>
+                      <input
+                        type='text'
+                        value={newProduct.name || ''}
+                        onChange={e =>
+                          setNewProduct({ ...newProduct, name: e.target.value })
+                        }
+                        className='w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all duration-200 bg-white/50'
+                        placeholder='Enter product name'
+                      />
+                    </div>
+                    <div>
+                      <label className='block text-sm font-semibold text-gray-800 mb-2'>
+                        Price ($)
+                      </label>
+                      <input
+                        type='number'
+                        step='0.01'
+                        value={newProduct.price || ''}
+                        onChange={e =>
+                          setNewProduct({
+                            ...newProduct,
+                            price: parseFloat(e.target.value),
+                          })
+                        }
+                        className='w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all duration-200 bg-white/50'
+                        placeholder='0.00'
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className='block text-sm font-semibold text-gray-800 mb-2'>
+                      Description
                     </label>
-                    <input
-                      type='number'
-                      step='0.01'
-                      value={newProduct.price || ''}
+                    <textarea
+                      value={newProduct.description || ''}
                       onChange={e =>
                         setNewProduct({
                           ...newProduct,
-                          price: parseFloat(e.target.value),
+                          description: e.target.value,
                         })
                       }
-                      className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500'
-                      placeholder='0.00'
+                      className='w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all duration-200 bg-white/50 resize-none h-32'
+                      placeholder='Enter product description'
                     />
                   </div>
                 </div>
-                <div className='mb-4'>
-                  <label className='block text-sm font-medium text-gray-700 mb-1'>
-                    Description
-                  </label>
-                  <textarea
-                    value={newProduct.description || ''}
-                    onChange={e =>
-                      setNewProduct({
-                        ...newProduct,
-                        description: e.target.value,
-                      })
-                    }
-                    className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500'
-                    rows={3}
-                    placeholder='Enter product description'
-                  />
-                </div>
-                <div className='flex gap-2'>
+
+                <div className='flex flex-col sm:flex-row gap-3'>
                   <Button
                     onClick={handleAddProduct}
-                    className='bg-emerald-600 hover:bg-emerald-700'
+                    className='flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white rounded-xl py-3 font-semibold transform transition-all duration-200 hover:scale-[1.02] shadow-lg hover:shadow-xl'
                   >
                     <Save className='w-4 h-4 mr-2' />
                     Save Product
@@ -175,6 +273,7 @@ export default function BusinessDashboard() {
                         available: true,
                       });
                     }}
+                    className='flex-1 border-gray-300 text-gray-700 hover:bg-gray-50 rounded-xl py-3 font-semibold'
                   >
                     <X className='w-4 h-4 mr-2' />
                     Cancel
@@ -184,13 +283,38 @@ export default function BusinessDashboard() {
             )}
           </div>
 
-          {/* Products Grid */}
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:ml-0 ml-16'>
-            {products.map(product => (
+          {/* Products Grid - Airbnb Style */}
+          <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:ml-0 ml-16'>
+            {products.map((product, index) => (
               <div
                 key={product.id}
-                className='bg-white rounded-lg border border-gray-200 shadow-sm'
+                className='group bg-white rounded-3xl border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] overflow-hidden'
+                style={{
+                  animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
+                }}
               >
+                {/* Product Image Placeholder */}
+                <div className='relative h-48 bg-gradient-to-br from-gray-100 to-gray-200'>
+                  <div className='absolute inset-0 bg-gradient-to-br from-slate-100/50 to-gray-100/50' />
+                  <div className='absolute inset-0 flex items-center justify-center'>
+                    <div className='text-6xl opacity-20'>🍽️</div>
+                  </div>
+                  {!product.available && (
+                    <div className='absolute top-4 right-4'>
+                      <span className='px-3 py-1 bg-red-500 text-white rounded-full text-xs font-medium'>
+                        Unavailable
+                      </span>
+                    </div>
+                  )}
+                  {product.available && (
+                    <div className='absolute top-4 right-4'>
+                      <span className='px-3 py-1 bg-green-500 text-white rounded-full text-xs font-medium'>
+                        Available
+                      </span>
+                    </div>
+                  )}
+                </div>
+
                 <div className='p-6'>
                   {editingProduct === product.id ? (
                     <EditProductForm
@@ -203,50 +327,46 @@ export default function BusinessDashboard() {
                   ) : (
                     <>
                       <div className='flex justify-between items-start mb-3'>
-                        <h3 className='text-lg font-semibold text-gray-900'>
+                        <h3 className='text-xl font-bold text-gray-900 group-hover:text-slate-600 transition-colors'>
                           {product.name}
                         </h3>
-                        <span className='text-lg font-bold text-gray-900'>
+                        <span className='text-xl font-bold text-slate-600'>
                           ${product.price.toFixed(2)}
                         </span>
                       </div>
-                      <p className='text-gray-600 mb-4'>
+
+                      <p className='text-gray-600 mb-6 line-clamp-2'>
                         {product.description}
                       </p>
 
-                      <div className='flex items-center justify-between mb-4'>
-                        <span
-                          className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            product.available
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-red-100 text-red-800'
-                          }`}
-                        >
-                          {product.available ? 'Available' : 'Unavailable'}
-                        </span>
+                      <div className='flex items-center justify-between mb-6'>
                         <button
                           onClick={() => toggleAvailability(product.id)}
-                          className='text-sm text-slate-600 hover:text-slate-800'
+                          className={`px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 ${
+                            product.available
+                              ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                              : 'bg-red-100 text-red-700 hover:bg-red-200'
+                          }`}
                         >
-                          Toggle Availability
+                          {product.available ? '✓ Available' : '✗ Unavailable'}
                         </button>
                       </div>
 
-                      <div className='flex gap-2'>
+                      <div className='flex gap-3'>
                         <Button
                           variant='outline'
                           size='sm'
                           onClick={() => setEditingProduct(product.id)}
-                          className='flex-1'
+                          className='flex-1 border-gray-300 text-gray-700 hover:bg-gray-50 rounded-xl font-semibold'
                         >
-                          <Edit className='w-4 h-4 mr-1' />
+                          <Edit className='w-4 h-4 mr-2' />
                           Edit
                         </Button>
                         <Button
                           variant='outline'
                           size='sm'
                           onClick={() => handleDeleteProduct(product.id)}
-                          className='text-red-600 hover:text-red-700 hover:bg-red-50'
+                          className='bg-red-50 border-red-200 text-red-600 hover:bg-red-100 hover:border-red-300 rounded-xl font-semibold'
                         >
                           <Trash2 className='w-4 h-4' />
                         </Button>
@@ -259,11 +379,28 @@ export default function BusinessDashboard() {
           </div>
 
           {products.length === 0 && (
-            <div className='text-center py-12 lg:ml-0 ml-16'>
-              <p className='text-gray-500 text-lg'>No products added yet</p>
-              <p className='text-gray-400'>
-                Click "Add New Product" to get started
+            <div className='text-center py-16 lg:ml-0 ml-16 animate-fadeInUp'>
+              <div className='relative mb-6 flex justify-center'>
+                <div className='w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center animate-bounce'>
+                  <ShoppingBag className='w-10 h-10 text-gray-400' />
+                </div>
+                <div className='absolute -top-2 -right-2 w-6 h-6 bg-slate-500 rounded-full flex items-center justify-center animate-ping'>
+                  <span className='text-white text-xs font-bold'>+</span>
+                </div>
+              </div>
+              <h3 className='text-xl font-bold text-gray-900 mb-2'>
+                No products yet
+              </h3>
+              <p className='text-gray-500 mb-6'>
+                Start building your menu by adding your first product
               </p>
+              <Button
+                onClick={() => setShowAddForm(true)}
+                className='bg-gradient-to-r from-slate-500 to-slate-600 hover:from-slate-600 hover:to-slate-700 text-white rounded-xl px-6 py-3 font-semibold transform transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl'
+              >
+                <Plus className='w-4 h-4 mr-2' />
+                Add Your First Product
+              </Button>
             </div>
           )}
         </div>
@@ -292,18 +429,34 @@ function EditProductForm({
   };
 
   return (
-    <div>
-      <div className='mb-3'>
+    <div className='space-y-4'>
+      {/* Header */}
+      <div className='flex items-center gap-2 mb-4'>
+        <div className='w-8 h-8 bg-blue-100 rounded-xl flex items-center justify-center'>
+          <Edit className='w-4 h-4 text-blue-600' />
+        </div>
+        <h4 className='font-bold text-gray-900'>Edit Product</h4>
+      </div>
+
+      {/* Form Fields */}
+      <div>
+        <label className='block text-xs font-semibold text-gray-700 mb-1'>
+          Product Name
+        </label>
         <input
           type='text'
           value={editedProduct.name}
           onChange={e =>
             setEditedProduct({ ...editedProduct, name: e.target.value })
           }
-          className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 font-semibold'
+          className='w-full px-3 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all duration-200 bg-white/50 font-semibold'
         />
       </div>
-      <div className='mb-3'>
+
+      <div>
+        <label className='block text-xs font-semibold text-gray-700 mb-1'>
+          Price ($)
+        </label>
         <input
           type='number'
           step='0.01'
@@ -314,29 +467,40 @@ function EditProductForm({
               price: parseFloat(e.target.value),
             })
           }
-          className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500'
+          className='w-full px-3 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all duration-200 bg-white/50'
         />
       </div>
-      <div className='mb-4'>
+
+      <div>
+        <label className='block text-xs font-semibold text-gray-700 mb-1'>
+          Description
+        </label>
         <textarea
           value={editedProduct.description}
           onChange={e =>
             setEditedProduct({ ...editedProduct, description: e.target.value })
           }
-          className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500'
+          className='w-full px-3 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all duration-200 bg-white/50 resize-none'
           rows={3}
         />
       </div>
-      <div className='flex gap-2'>
+
+      {/* Action Buttons */}
+      <div className='flex gap-2 pt-2'>
         <Button
           onClick={handleSave}
           size='sm'
-          className='bg-emerald-600 hover:bg-emerald-700'
+          className='flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white rounded-xl font-semibold'
         >
           <Save className='w-4 h-4 mr-1' />
           Save
         </Button>
-        <Button variant='outline' size='sm' onClick={onCancel}>
+        <Button
+          variant='outline'
+          size='sm'
+          onClick={onCancel}
+          className='flex-1 border-gray-300 text-gray-700 hover:bg-gray-50 rounded-xl font-semibold'
+        >
           <X className='w-4 h-4 mr-1' />
           Cancel
         </Button>

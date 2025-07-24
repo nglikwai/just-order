@@ -141,7 +141,7 @@ export default function BusinessOrders() {
     orders.filter(order => order.status === status).length;
 
   return (
-    <div className='min-h-screen bg-gray-50 flex'>
+    <div className='min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-50 flex'>
       <BusinessSidebar />
       <div className='flex-1 lg:ml-0'>
         <div className='max-w-7xl mx-auto px-6 py-8'>
@@ -149,7 +149,7 @@ export default function BusinessOrders() {
           <div className='mb-8 lg:ml-0 ml-16'>
             <div className='flex justify-between items-center mb-4'>
               <div>
-                <h1 className='text-3xl font-bold text-gray-900 mb-2'>
+                <h1 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2'>
                   Order Management
                 </h1>
                 <p className='text-gray-600'>
@@ -168,31 +168,31 @@ export default function BusinessOrders() {
 
             {/* Stats Cards */}
             <div className='grid grid-cols-2 md:grid-cols-5 gap-4 mb-6'>
-              <div className='bg-white p-4 rounded-lg border border-gray-200 shadow-sm'>
+              <div className='bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300'>
                 <div className='text-2xl font-bold text-gray-900'>
                   {orders.length}
                 </div>
                 <div className='text-sm text-gray-600'>Total Orders</div>
               </div>
-              <div className='bg-white p-4 rounded-lg border border-gray-200 shadow-sm'>
+              <div className='bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300'>
                 <div className='text-2xl font-bold text-yellow-600'>
                   {getOrdersByStatus('pending')}
                 </div>
                 <div className='text-sm text-gray-600'>Pending</div>
               </div>
-              <div className='bg-white p-4 rounded-lg border border-gray-200 shadow-sm'>
+              <div className='bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300'>
                 <div className='text-2xl font-bold text-orange-600'>
                   {getOrdersByStatus('preparing')}
                 </div>
                 <div className='text-sm text-gray-600'>Preparing</div>
               </div>
-              <div className='bg-white p-4 rounded-lg border border-gray-200 shadow-sm'>
+              <div className='bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300'>
                 <div className='text-2xl font-bold text-green-600'>
                   {getOrdersByStatus('ready')}
                 </div>
                 <div className='text-sm text-gray-600'>Ready</div>
               </div>
-              <div className='bg-white p-4 rounded-lg border border-gray-200 shadow-sm'>
+              <div className='bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300'>
                 <div className='text-2xl font-bold text-gray-600'>
                   {getOrdersByStatus('completed')}
                 </div>
@@ -248,7 +248,7 @@ export default function BusinessOrders() {
               filteredOrders.map(order => (
                 <div
                   key={order.orderId}
-                  className='bg-white rounded-lg border border-gray-200 shadow-sm p-6'
+                  className='bg-white rounded-3xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 p-6 sm:p-8'
                 >
                   <div className='flex justify-between items-start mb-4'>
                     <div>
@@ -311,11 +311,11 @@ export default function BusinessOrders() {
 
                   {/* Special Notes */}
                   {order.notes && (
-                    <div className='mb-4 p-3 bg-blue-50 rounded-lg'>
-                      <h4 className='font-medium text-blue-900 mb-1'>
+                    <div className='mb-4 p-4 bg-slate-50 rounded-2xl border border-slate-100'>
+                      <h4 className='font-medium text-slate-900 mb-1'>
                         Special Instructions:
                       </h4>
-                      <p className='text-blue-800 text-sm'>{order.notes}</p>
+                      <p className='text-slate-700 text-sm'>{order.notes}</p>
                     </div>
                   )}
 
@@ -330,10 +330,10 @@ export default function BusinessOrders() {
                           )
                         }
                         className={`
-                        ${order.status === 'pending' ? 'bg-slate-600 hover:bg-slate-700' : ''}
-                        ${order.status === 'confirmed' ? 'bg-amber-600 hover:bg-amber-700' : ''}
-                        ${order.status === 'preparing' ? 'bg-emerald-600 hover:bg-emerald-700' : ''}
-                        ${order.status === 'ready' ? 'bg-gray-600 hover:bg-gray-700' : ''}
+                        ${order.status === 'pending' ? 'bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 shadow-lg hover:shadow-slate-500/25' : ''}
+                        ${order.status === 'confirmed' ? 'bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 shadow-lg hover:shadow-amber-500/25' : ''}
+                        ${order.status === 'preparing' ? 'bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 shadow-lg hover:shadow-emerald-500/25' : ''}
+                        ${order.status === 'ready' ? 'bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 shadow-lg hover:shadow-gray-500/25' : ''}
                       `}
                       >
                         {getActionButtonText(order.status)}

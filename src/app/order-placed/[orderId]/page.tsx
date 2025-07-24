@@ -2,9 +2,14 @@
 
 import { useEffect, useState } from 'react';
 
-import { CheckCircle, Clock, Package, Utensils } from 'lucide-react';
-
-import { Button } from '@/components/components/ui/button';
+import { EstimatedTime } from './_components/EstimatedTime';
+import { LoadingState } from './_components/LoadingState';
+import { OrderActions } from './_components/OrderActions';
+import { OrderDetails } from './_components/OrderDetails';
+import { OrderNotFound } from './_components/OrderNotFound';
+import { OrderProgress } from './_components/OrderProgress';
+import { OrderStatus, OrderStatusCard } from './_components/OrderStatusCard';
+import { SuccessHeader } from './_components/SuccessHeader';
 
 interface OrderItem {
   id: string;
@@ -19,15 +24,11 @@ interface Order {
   businessId: string;
   items: OrderItem[];
   total: number;
-  status: 'pending' | 'confirmed' | 'preparing' | 'ready' | 'completed';
+  status: OrderStatus;
   timestamp: string;
 }
 
-export default function OrderPlaced({
-  params,
-}: {
-  params: { orderId: string };
-}) {
+export default function OrderPlaced() {
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -45,7 +46,7 @@ export default function OrderPlaced({
       if (storedOrder) {
         const currentOrder = JSON.parse(storedOrder);
         // Simulate status progression
-        const statusProgression: Order['status'][] = [
+        const statusProgression: OrderStatus[] = [
           'pending',
           'confirmed',
           'preparing',
@@ -65,265 +66,35 @@ export default function OrderPlaced({
     return () => clearInterval(interval);
   }, []);
 
-  const getStatusIcon = (status: Order['status']) => {
-    switch (status) {
-      case 'pending':
-        return <Clock className='w-6 h-6 text-yellow-600' />;
-      case 'confirmed':
-        return <CheckCircle className='w-6 h-6 text-blue-600' />;
-      case 'preparing':
-        return <Utensils className='w-6 h-6 text-orange-600' />;
-      case 'ready':
-        return <Package className='w-6 h-6 text-green-600' />;
-      case 'completed':
-        return <CheckCircle className='w-6 h-6 text-green-600' />;
-      default:
-        return <Clock className='w-6 h-6 text-gray-600' />;
-    }
-  };
-
-  const getStatusText = (status: Order['status']) => {
-    switch (status) {
-      case 'pending':
-        return 'Order Placed - Waiting for confirmation';
-      case 'confirmed':
-        return 'Order Confirmed - Being prepared';
-      case 'preparing':
-        return 'Preparing Your Order';
-      case 'ready':
-        return 'Order Ready for Pickup';
-      case 'completed':
-        return 'Order Completed';
-      default:
-        return 'Processing Order';
-    }
-  };
-
-  const getStatusColor = (status: Order['status']) => {
-    switch (status) {
-      case 'pending':
-        return 'bg-yellow-50 border-yellow-200 text-yellow-800';
-      case 'confirmed':
-        return 'bg-blue-50 border-blue-200 text-blue-800';
-      case 'preparing':
-        return 'bg-orange-50 border-orange-200 text-orange-800';
-      case 'ready':
-        return 'bg-green-50 border-green-200 text-green-800';
-      case 'completed':
-        return 'bg-green-50 border-green-200 text-green-800';
-      default:
-        return 'bg-gray-50 border-gray-200 text-gray-800';
-    }
-  };
-
   if (loading) {
-    return (
-      <div className='min-h-screen bg-gray-50 flex items-center justify-center'>
-        <div className='text-center'>
-          <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4' />
-          <p className='text-gray-600'>Loading your order...</p>
-        </div>
-      </div>
-    );
+    return <LoadingState />;
   }
 
   if (!order) {
-    return (
-      <div className='min-h-screen bg-gray-50 flex items-center justify-center'>
-        <div className='text-center'>
-          <h1 className='text-2xl font-bold text-gray-900 mb-4'>
-            Order Not Found
-          </h1>
-          <p className='text-gray-600 mb-6'>
-            We couldn't find your order details.
-          </p>
-          <Button onClick={() => window.history.back()}>Go Back</Button>
-        </div>
-      </div>
-    );
+    return <OrderNotFound />;
   }
 
   return (
-    <div className='min-h-screen bg-gray-50'>
+    <div className='min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-50'>
       <div className='max-w-2xl mx-auto px-6 py-8'>
-        {/* Success Header */}
-        <div className='text-center mb-8'>
-          <div className='w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4'>
-            <CheckCircle className='w-8 h-8 text-green-600' />
-          </div>
-          <h1 className='text-3xl font-bold text-gray-900 mb-2'>
-            Order Placed Successfully!
-          </h1>
-          <p className='text-gray-600'>
-            Thank you for your order from {order.businessName}
-          </p>
-        </div>
+        <SuccessHeader businessName={order.businessName} />
 
-        {/* Order Status */}
-        <div
-          className={`rounded-lg border-2 p-6 mb-6 ${getStatusColor(order.status)}`}
-        >
-          <div className='flex items-center gap-3 mb-2'>
-            {getStatusIcon(order.status)}
-            <h2 className='text-lg font-semibold'>
-              {getStatusText(order.status)}
-            </h2>
-          </div>
-          <p className='text-sm opacity-75'>
-            Order #{order.orderId} • Placed at{' '}
-            {new Date(order.timestamp).toLocaleTimeString()}
-          </p>
-        </div>
+        <OrderStatusCard
+          status={order.status}
+          orderId={order.orderId}
+          timestamp={order.timestamp}
+        />
 
-        {/* Order Progress */}
-        <div className='bg-white rounded-lg border border-gray-200 shadow-sm p-6 mb-6'>
-          <h3 className='text-lg font-semibold text-gray-900 mb-4'>
-            Order Progress
-          </h3>
-          <div className='space-y-4'>
-            {[
-              {
-                status: 'pending',
-                label: 'Order Placed',
-                time: new Date(order.timestamp).toLocaleTimeString(),
-              },
-              {
-                status: 'confirmed',
-                label: 'Order Confirmed',
-                time: order.status !== 'pending' ? 'Confirmed' : '',
-              },
-              {
-                status: 'preparing',
-                label: 'Preparing',
-                time: ['preparing', 'ready', 'completed'].includes(order.status)
-                  ? 'In progress'
-                  : '',
-              },
-              {
-                status: 'ready',
-                label: 'Ready for Pickup',
-                time: ['ready', 'completed'].includes(order.status)
-                  ? 'Ready'
-                  : '',
-              },
-            ].map((step, index) => (
-              <div key={step.status} className='flex items-center gap-3'>
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                    order.status === step.status
-                      ? 'bg-blue-600 text-white'
-                      : [
-                            'confirmed',
-                            'preparing',
-                            'ready',
-                            'completed',
-                          ].includes(order.status) &&
-                          ['pending', 'confirmed', 'preparing']
-                            .slice(
-                              0,
-                              [
-                                'pending',
-                                'confirmed',
-                                'preparing',
-                                'ready',
-                              ].indexOf(order.status) + 1
-                            )
-                            .includes(step.status as any)
-                        ? 'bg-green-600 text-white'
-                        : 'bg-gray-200 text-gray-600'
-                  }`}
-                >
-                  {['confirmed', 'preparing', 'ready', 'completed'].includes(
-                    order.status
-                  ) &&
-                  ['pending', 'confirmed', 'preparing']
-                    .slice(
-                      0,
-                      ['pending', 'confirmed', 'preparing', 'ready'].indexOf(
-                        order.status
-                      ) + 1
-                    )
-                    .includes(step.status as any) ? (
-                    <CheckCircle className='w-4 h-4' />
-                  ) : (
-                    <span className='text-xs font-bold'>{index + 1}</span>
-                  )}
-                </div>
-                <div className='flex-1'>
-                  <p
-                    className={`font-medium ${
-                      order.status === step.status
-                        ? 'text-blue-600'
-                        : 'text-gray-900'
-                    }`}
-                  >
-                    {step.label}
-                  </p>
-                  {step.time && (
-                    <p className='text-sm text-gray-500'>{step.time}</p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <OrderProgress
+          currentStatus={order.status}
+          timestamp={order.timestamp}
+        />
 
-        {/* Order Details */}
-        <div className='bg-white rounded-lg border border-gray-200 shadow-sm p-6 mb-6'>
-          <h3 className='text-lg font-semibold text-gray-900 mb-4'>
-            Order Details
-          </h3>
-          <div className='space-y-3'>
-            {order.items.map(item => (
-              <div key={item.id} className='flex justify-between items-center'>
-                <div>
-                  <span className='font-medium text-gray-900'>{item.name}</span>
-                  <span className='text-gray-500 ml-2'>×{item.quantity}</span>
-                </div>
-                <span className='font-medium text-gray-900'>
-                  ${(item.price * item.quantity).toFixed(2)}
-                </span>
-              </div>
-            ))}
-            <div className='border-t border-gray-200 pt-3 mt-3'>
-              <div className='flex justify-between items-center'>
-                <span className='text-lg font-semibold text-gray-900'>
-                  Total
-                </span>
-                <span className='text-lg font-bold text-gray-900'>
-                  ${order.total.toFixed(2)}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <OrderDetails items={order.items} total={order.total} />
 
-        {/* Action Buttons */}
-        <div className='flex gap-3'>
-          <Button
-            variant='outline'
-            onClick={() => window.history.back()}
-            className='flex-1'
-          >
-            Back to Menu
-          </Button>
-          <Button
-            onClick={() => window.location.reload()}
-            className='flex-1 bg-blue-600 hover:bg-blue-700'
-          >
-            Refresh Status
-          </Button>
-        </div>
+        <OrderActions />
 
-        {/* Estimated Time */}
-        {order.status !== 'completed' && (
-          <div className='text-center mt-6 p-4 bg-blue-50 rounded-lg'>
-            <p className='text-sm text-blue-800'>
-              <Clock className='w-4 h-4 inline mr-1' />
-              Estimated preparation time: 15-20 minutes
-            </p>
-          </div>
-        )}
+        <EstimatedTime status={order.status} />
       </div>
     </div>
   );
