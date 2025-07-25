@@ -8,23 +8,7 @@ import { OrdersHeader } from './components/OrdersHeader';
 import { OrderStats } from './components/OrderStats';
 
 import { Button } from '@/components/components/ui/button';
-
-interface OrderItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-}
-
-interface Order {
-  orderId: string;
-  customerName?: string;
-  items: OrderItem[];
-  total: number;
-  status: 'pending' | 'confirmed' | 'preparing' | 'ready' | 'completed';
-  timestamp: string;
-  notes?: string;
-}
+import type { Order } from '@/types';
 
 export default function BusinessOrders() {
   const [orders, setOrders] = useState<Order[]>([

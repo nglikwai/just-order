@@ -1,11 +1,6 @@
 import { CheckCircle, Clock, Package, Utensils } from 'lucide-react';
 
-export type OrderStatusType =
-  | 'pending'
-  | 'confirmed'
-  | 'preparing'
-  | 'ready'
-  | 'completed';
+import type { OrderStatusType } from '@/types';
 
 interface OrderStatusProps {
   status: OrderStatusType;

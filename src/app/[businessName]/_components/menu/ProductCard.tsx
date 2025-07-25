@@ -2,9 +2,8 @@
 
 import { Minus, Plus } from 'lucide-react';
 
-import { CartItem, Product } from './types';
-
 import { Button } from '@/components/components/ui/button';
+import type { CartItem, Product } from '@/types';
 
 interface ProductCardProps {
   product: Product;

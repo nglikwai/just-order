@@ -11,25 +11,18 @@ import { OrderProgress } from './_components/OrderProgress';
 import { OrderStatus, OrderStatusCard } from './_components/OrderStatusCard';
 import { SuccessHeader } from './_components/SuccessHeader';
 
-interface OrderItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-}
+import type { Order } from '@/types';
 
-interface Order {
-  orderId: string;
+interface ExtendedOrder extends Order {
   businessName: string;
   businessId: string;
-  items: OrderItem[];
   total: number;
   status: OrderStatus;
   timestamp: string;
 }
 
 export default function OrderPlaced() {
-  const [order, setOrder] = useState<Order | null>(null);
+  const [order, setOrder] = useState<ExtendedOrder | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

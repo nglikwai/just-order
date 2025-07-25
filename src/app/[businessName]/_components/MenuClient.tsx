@@ -10,8 +10,9 @@ import { CartSummary } from './menu/CartSummary';
 import { CheckoutForm } from './menu/CheckoutForm';
 import { EmptyCart } from './menu/EmptyCart';
 import { ProductCard } from './menu/ProductCard';
-import { CartItem, CustomerInfo, Product } from './menu/types';
 import { LoginSuggestion } from './LoginSuggestion';
+
+import type { CartItem, CustomerInfo, Product } from '@/types';
 
 interface MenuClientProps {
   products: Product[];

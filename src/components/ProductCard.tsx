@@ -1,23 +1,15 @@
 import { Edit, Minus, Plus, Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/components/ui/button';
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  available: boolean;
-  image?: string;
-}
+import type { Product } from '@/types';
 
 interface ProductCardProps {
-  product: Product;
+  product: Product & { image?: string };
   mode: 'customer' | 'business';
   quantity?: number;
-  onAddToCart?: (product: Product) => void;
+  onAddToCart?: (product: Product & { image?: string }) => void;
   onUpdateQuantity?: (productId: string, change: number) => void;
-  onEdit?: (product: Product) => void;
+  onEdit?: (product: Product & { image?: string }) => void;
   onDelete?: (productId: string) => void;
   onToggleAvailability?: (productId: string) => void;
 }

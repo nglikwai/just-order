@@ -1,8 +1,7 @@
 'use client';
 
-import { CartItem, CustomerInfo } from './types';
-
 import { Button } from '@/components/components/ui/button';
+import type { CartItem, CustomerInfo } from '@/types';
 
 interface CheckoutFormProps {
   cart: CartItem[];

@@ -1,4 +1,4 @@
-import { Product } from './menu/types';
+import type { Product } from '@/types';
 
 interface StructuredDataProps {
   businessName: string;

@@ -7,20 +7,11 @@ import { useEffect, useState } from 'react';
 import { AlertCircle, CheckCircle, Clock, Package, Search } from 'lucide-react';
 
 import { Button } from '@/components/components/ui/button';
+import type { Order } from '@/types';
 
-interface Order {
-  orderId: string;
+interface ExtendedOrder extends Order {
   businessName: string;
   businessId: string;
-  items: Array<{
-    id: string;
-    name: string;
-    price: number;
-    quantity: number;
-  }>;
-  total: number;
-  status: 'pending' | 'confirmed' | 'preparing' | 'ready' | 'completed';
-  timestamp: string;
   customerPhone?: string;
 }
 
@@ -30,7 +21,7 @@ export default function TrackOrder() {
   );
   const [phoneNumber, setPhoneNumber] = useState('');
   const [orderId, setOrderId] = useState('');
-  const [recentOrders, setRecentOrders] = useState<Order[]>([]);
+  const [recentOrders, setRecentOrders] = useState<ExtendedOrder[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();

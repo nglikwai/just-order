@@ -1,4 +1,4 @@
-import { Product } from '../_components/menu/types';
+import type { Product } from '@/types';
 
 // Simulate fetching business data - in real app, this would be from a database
 export async function getBusinessData(businessId: string) {

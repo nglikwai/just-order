@@ -2,9 +2,8 @@
 
 import { ShoppingCart } from 'lucide-react';
 
-import { CartItem } from './types';
-
 import { Button } from '@/components/components/ui/button';
+import type { CartItem } from '@/types';
 
 interface CartSummaryProps {
   cart: CartItem[];

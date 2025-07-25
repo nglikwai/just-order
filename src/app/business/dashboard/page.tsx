@@ -12,15 +12,7 @@ import { StatsCards } from './components/StatsCards';
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 import { Button } from '@/components/components/ui/button';
 import { useBusiness } from '@/hooks/useBusiness';
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image?: string;
-  available: boolean;
-}
+import type { Product } from '@/types';
 
 export default function BusinessDashboard() {
   const { data: business, isLoading, error } = useBusiness();

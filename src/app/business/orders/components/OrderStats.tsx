@@ -1,7 +1,4 @@
-interface Order {
-  orderId: string;
-  status: 'pending' | 'confirmed' | 'preparing' | 'ready' | 'completed';
-}
+import type { Order } from '@/types';
 
 interface OrderStatsProps {
   orders: Order[];
