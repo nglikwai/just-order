@@ -12,7 +12,7 @@ import {
 
 export function HeroSection() {
   return (
-    <section className='relative px-4 sm:px-6 py-8 overflow-hidden h-screen flex items-center'>
+    <section className='relative px-4 sm:px-6 py-8 overflow-hidden min-h-screen flex items-center'>
       {/* Background Elements */}
       <div className='absolute inset-0'>
         <div className='absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-gray-50' />
@@ -22,7 +22,7 @@ export function HeroSection() {
       </div>
 
       <div className='relative max-w-7xl mx-auto w-full'>
-        <div className='grid lg:grid-cols-2 gap-12 lg:gap-16 items-center'>
+        <div className='grid md:grid-cols-2 gap-8 lg:gap-16 items-center'>
           {/* Left Column - Content */}
           <div className='text-center lg:text-left'>
             {/* Trust Badge */}
@@ -33,27 +33,24 @@ export function HeroSection() {
 
             {/* Main Headline */}
             <h1
-              className='text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-6 leading-[1.1] animate-fadeInUp'
+              className='text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-6 leading-[1.1] animate-fadeInUp'
               style={{ animationDelay: '0.1s' }}
             >
               <span className='block'>Just</span>
               <span className='block bg-gradient-to-r from-slate-600 via-slate-700 to-gray-800 bg-clip-text text-transparent'>
                 Order
               </span>
-              <span className='block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-gray-700 font-medium'>
+              <span className='block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-gray-700 font-medium'>
                 Simple, fast, free
               </span>
             </h1>
 
             {/* Subheadline */}
             <p
-              className='text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed animate-fadeInUp'
+              className='text-base sm:text-lg text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed animate-fadeInUp'
               style={{ animationDelay: '0.2s' }}
             >
-              Beautiful ordering for small businesses.
-              <span className='block mt-2 text-lg text-gray-500'>
-                Simple, fast, free.
-              </span>
+              Beautiful ordering for small businesses. Simple, fast, free.
             </p>
 
             {/* CTA Buttons */}
@@ -102,14 +99,11 @@ export function HeroSection() {
           </div>
 
           {/* Right Column - Visual */}
-          <div
-            className='relative animate-fadeInUp'
-            style={{ animationDelay: '0.5s' }}
-          >
+          <div className='hidden md:block relative animate-fadeInUp'>
             {/* Main Device Mockup */}
             <div className='relative'>
               <div className='bg-white rounded-3xl shadow-2xl border border-gray-200 overflow-hidden p-2 transform rotate-2 hover:rotate-0 transition-transform duration-500'>
-                <div className='aspect-[9/16] bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl flex items-center justify-center relative overflow-hidden'>
+                <div className='aspect-[9/16] bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl flex items-start justify-center pt-12 relative overflow-hidden'>
                   {/* Mock Phone Interface */}
                   <div className='absolute inset-4 bg-white rounded-2xl shadow-inner p-4'>
                     <div className='space-y-4'>

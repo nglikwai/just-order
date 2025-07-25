@@ -5,7 +5,8 @@
       "Bash(mv:*)",
       "Bash(npm run lint)",
       "Bash(npm run lint:*)",
-      "Bash(find \"/Users/likwai/projects/just-order/src/app\" -name \"*dashboard*\" -o -name \"*business*\")"
+      "Bash(find \"/Users/likwai/projects/just-order/src/app\" -name \"*dashboard*\" -o -name \"*business*\")",
+      "Bash(npm run build:*)"
     ],
     "deny": []
   }

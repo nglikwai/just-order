@@ -1,3 +1,5 @@
+'use client';
+
 import { CartItem, CustomerInfo } from './types';
 
 import { Button } from '@/components/components/ui/button';
@@ -22,7 +24,7 @@ export function CheckoutForm({
   };
 
   return (
-    <div className='bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-2xl border border-gray-100 p-4 sm:p-6 md:p-8 mx-2 sm:mx-4 animate-fadeInUp'>
+    <div className='fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md rounded-t-xl sm:rounded-t-2xl shadow-2xl border border-gray-100 p-4 sm:p-6 md:p-8 max-h-[85vh] overflow-y-auto animate-fadeInUp'>
       <div className='flex items-center gap-2 sm:gap-3 mb-6 sm:mb-8'>
         <div className='w-10 h-10 sm:w-12 sm:h-12 bg-slate-100 rounded-full flex items-center justify-center'>
           <span className='text-xl sm:text-2xl'>📝</span>

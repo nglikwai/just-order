@@ -1,8 +1,9 @@
-interface HeroSectionProps {
+interface BusinessHeroProps {
   businessName: string;
+  description: string;
 }
 
-export function HeroSection({ businessName }: HeroSectionProps) {
+export function BusinessHero({ businessName, description }: BusinessHeroProps) {
   return (
     <div className='relative bg-white overflow-hidden border-b border-gray-100'>
       {/* Subtle Background Pattern */}
@@ -45,7 +46,7 @@ export function HeroSection({ businessName }: HeroSectionProps) {
                     </div>
                   </div>
                   <p className='text-lg text-gray-600 mb-6 leading-relaxed'>
-                    Delicious food made with love.
+                    {description}
                   </p>
                 </div>
               </div>
