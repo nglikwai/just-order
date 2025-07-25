@@ -99,7 +99,7 @@ export function HeroSection() {
           </div>
 
           {/* Right Column - Visual */}
-          <div className='hidden md:block relative animate-fadeInUp'>
+          <div className='hidden md:block relative animate-fadeInUp mt-10'>
             {/* Main Device Mockup */}
             <div className='relative'>
               <div className='bg-white rounded-3xl shadow-2xl border border-gray-200 overflow-hidden p-2 transform rotate-2 hover:rotate-0 transition-transform duration-500'>

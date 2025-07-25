@@ -1,5 +1,18 @@
-import NextAuth, { type NextAuthOptions } from 'next-auth';
+import NextAuth from 'next-auth';
+import { NextAuthOptions } from 'next-auth';
+// Extend the Session type to include 'id' on user
 import GoogleProvider from 'next-auth/providers/google';
+
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      id?: string;
+    };
+  }
+}
 
 const authOptions: NextAuthOptions = {
   providers: [
