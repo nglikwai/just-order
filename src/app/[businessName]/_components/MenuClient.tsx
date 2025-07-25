@@ -2,13 +2,16 @@
 
 import { useRouter } from 'next/navigation';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { useSession } from 'next-auth/react';
 
 import { CartSummary } from './menu/CartSummary';
 import { CheckoutForm } from './menu/CheckoutForm';
 import { EmptyCart } from './menu/EmptyCart';
 import { ProductCard } from './menu/ProductCard';
 import { CartItem, CustomerInfo, Product } from './menu/types';
+import { LoginSuggestion } from './LoginSuggestion';
 
 interface MenuClientProps {
   products: Product[];
@@ -22,6 +25,7 @@ export function MenuClient({
   businessId,
 }: MenuClientProps) {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const [cart, setCart] = useState<CartItem[]>([]);
   const [showCheckout, setShowCheckout] = useState(false);
@@ -30,6 +34,26 @@ export function MenuClient({
     phone: '',
     notes: '',
   });
+
+  // Load saved customer info from localStorage on mount
+  useEffect(() => {
+    const savedCustomerInfo = localStorage.getItem('customerInfo');
+    if (savedCustomerInfo && !session) {
+      try {
+        const parsed = JSON.parse(savedCustomerInfo);
+        setCustomerInfo(parsed);
+      } catch (error) {
+        console.error('Error loading saved customer info:', error);
+      }
+    } else if (session?.user) {
+      // Pre-fill with user data if logged in
+      setCustomerInfo({
+        name: session.user.name || '',
+        phone: '',
+        notes: '',
+      });
+    }
+  }, [session]);
 
   const addToCart = (product: Product) => {
     const existingItem = cart.find(item => item.id === product.id);
@@ -69,6 +93,18 @@ export function MenuClient({
   const confirmOrder = () => {
     if (!customerInfo.name || !customerInfo.phone) {
       return; // Basic validation
+    }
+
+    // Save customer info to localStorage for future orders (if not logged in)
+    if (!session) {
+      localStorage.setItem(
+        'customerInfo',
+        JSON.stringify({
+          name: customerInfo.name,
+          phone: customerInfo.phone,
+          notes: '', // Don't save notes
+        })
+      );
     }
 
     const orderId = Date.now().toString();
@@ -127,6 +163,9 @@ export function MenuClient({
       )}
 
       {cart.length === 0 && <EmptyCart />}
+
+      {/* Show login suggestion for guests with items in cart */}
+      {!session && cart.length > 0 && <LoginSuggestion />}
     </>
   );
 }

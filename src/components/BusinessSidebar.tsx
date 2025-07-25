@@ -7,6 +7,7 @@ import { useState } from 'react';
 
 import {
   BarChart3,
+  ExternalLink,
   Home,
   LayoutDashboard,
   Menu,
@@ -14,6 +15,8 @@ import {
   ShoppingBag,
   X,
 } from 'lucide-react';
+
+import { useBusiness } from '@/hooks/useBusiness';
 
 const navigation = [
   { name: 'Dashboard', href: '/business/dashboard', icon: LayoutDashboard },
@@ -25,6 +28,7 @@ const navigation = [
 export function BusinessSidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
+  const { data: business } = useBusiness();
 
   return (
     <>
@@ -76,16 +80,24 @@ export function BusinessSidebar() {
             </button>
           </div>
 
-          {/* Business info */}
-          <Link
-            href={`/${'joes-coffee-shop'}`}
-            className='px-6 py-4 border-b border-gray-200 bg-slate-50'
-          >
-            <h2 className='text-sm font-medium text-gray-900'>
-              Joe's Coffee Shop
-            </h2>
-            <p className='text-xs text-gray-600'>Business Dashboard</p>
-          </Link>
+          {/* Business info & Menu link */}
+          <div className='px-6 py-4 border-b border-gray-200 bg-slate-50 space-y-3'>
+            <div>
+              <h2 className='text-sm font-medium text-gray-900'>
+                {business?.name || 'Your Business'}
+              </h2>
+              <p className='text-xs text-gray-600'>Business Dashboard</p>
+            </div>
+
+            <Link
+              href={`/${business?.id || 'demo-business'}`}
+              target='_blank'
+              className='inline-flex items-center gap-2 px-3 py-2 text-xs font-medium text-slate-600 bg-white rounded-md border border-slate-200 hover:bg-slate-50 transition-colors'
+            >
+              <ExternalLink className='w-3 h-3' />
+              View Customer Menu
+            </Link>
+          </div>
 
           {/* Navigation */}
           <nav className='flex-1 px-4 py-4 space-y-1 overflow-y-auto'>
@@ -121,11 +133,13 @@ export function BusinessSidebar() {
           <div className='px-6 py-4 border-t border-gray-200'>
             <div className='flex items-center'>
               <div className='w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center'>
-                <span className='text-sm font-medium text-slate-600'>JC</span>
+                <span className='text-sm font-medium text-slate-600'>
+                  {business?.name?.charAt(0) || 'B'}
+                </span>
               </div>
               <div className='ml-3'>
                 <p className='text-sm font-medium text-gray-900'>
-                  Joe's Coffee
+                  {business?.ownerName || 'Business Owner'}
                 </p>
                 <p className='text-xs text-gray-600'>Owner</p>
               </div>

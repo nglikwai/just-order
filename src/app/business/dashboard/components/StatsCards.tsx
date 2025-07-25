@@ -1,11 +1,19 @@
-import { ShoppingBag, Star, TrendingUp, Users } from 'lucide-react';
+import { DollarSign, ShoppingBag, Star, Users } from 'lucide-react';
+
+interface BusinessStats {
+  totalOrders: number;
+  totalRevenue: number;
+  avgOrderValue: number;
+  customersThisMonth: number;
+}
 
 interface StatsCardsProps {
   productCount: number;
+  stats?: BusinessStats;
 }
 
-export function StatsCards({ productCount }: StatsCardsProps) {
-  const stats = [
+export function StatsCards({ productCount, stats }: StatsCardsProps) {
+  const statsData = [
     {
       icon: ShoppingBag,
       value: productCount,
@@ -13,22 +21,22 @@ export function StatsCards({ productCount }: StatsCardsProps) {
       color: 'blue',
     },
     {
-      icon: TrendingUp,
-      value: 24,
-      label: 'Orders Today',
+      icon: Users,
+      value: stats?.totalOrders || 0,
+      label: 'Total Orders',
       color: 'green',
     },
     {
-      icon: Star,
-      value: 4.8,
-      label: 'Rating',
-      color: 'amber',
+      icon: DollarSign,
+      value: `$${(stats?.totalRevenue || 0).toLocaleString()}`,
+      label: 'Revenue',
+      color: 'emerald',
     },
     {
-      icon: Users,
-      value: 156,
-      label: 'Customers',
-      color: 'slate',
+      icon: Star,
+      value: stats?.customersThisMonth || 0,
+      label: 'Customers This Month',
+      color: 'amber',
     },
   ];
 
@@ -36,6 +44,7 @@ export function StatsCards({ productCount }: StatsCardsProps) {
     const colors = {
       blue: 'bg-blue-100 text-blue-600',
       green: 'bg-green-100 text-green-600',
+      emerald: 'bg-emerald-100 text-emerald-600',
       amber: 'bg-amber-100 text-amber-600',
       slate: 'bg-slate-100 text-slate-600',
     };
@@ -44,7 +53,7 @@ export function StatsCards({ productCount }: StatsCardsProps) {
 
   return (
     <div className='grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8'>
-      {stats.map((stat, index) => (
+      {statsData.map((stat, index) => (
         <div
           key={index}
           className='bg-white rounded-2xl p-4 sm:p-6 border border-gray-100 hover:shadow-lg transition-all duration-300'
