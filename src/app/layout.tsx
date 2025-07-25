@@ -3,9 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import type { Metadata } from 'next';
 
-import { FloatingAuth } from '@/components/auth/FloatingAuth';
-import { AuthProvider } from '@/providers/AuthProvider';
-import ReactQueryClientProvider from '@/providers/ReactQueryClientProvider';
+import ClientLayout from '@/providers/ClientLayout';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -33,12 +31,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider>
-          <ReactQueryClientProvider>
-            {children}
-            <FloatingAuth />
-          </ReactQueryClientProvider>
-        </AuthProvider>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

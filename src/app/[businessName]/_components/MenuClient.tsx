@@ -12,7 +12,7 @@ import { EmptyCart } from './menu/EmptyCart';
 import { ProductCard } from './menu/ProductCard';
 import { LoginSuggestion } from './LoginSuggestion';
 
-import type { CartItem, CustomerInfo, Product } from '@/types';
+import type { CartItem, CustomerInfo, Product } from '@/types/index';
 
 interface MenuClientProps {
   products: Product[];

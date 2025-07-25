@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { AlertCircle, CheckCircle, Clock, Package, Search } from 'lucide-react';
 
 import { Button } from '@/components/components/ui/button';
-import type { Order } from '@/types';
+import type { Order } from '@/types/index';
 
 interface ExtendedOrder extends Order {
   businessName: string;

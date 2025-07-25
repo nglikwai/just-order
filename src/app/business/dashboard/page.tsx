@@ -12,7 +12,7 @@ import { StatsCards } from './components/StatsCards';
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 import { Button } from '@/components/components/ui/button';
 import { useBusiness } from '@/hooks/useBusiness';
-import type { Product } from '@/types';
+import type { Product } from '@/types/index';
 
 export default function BusinessDashboard() {
   const { data: business, isLoading, error } = useBusiness();

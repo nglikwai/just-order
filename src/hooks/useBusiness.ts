@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import type { BusinessData } from '@/types';
+import type { BusinessData } from '@/types/index';
 
 const fetchBusiness = async (): Promise<BusinessData> => {
   const response = await fetch('/api/business');

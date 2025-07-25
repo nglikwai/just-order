@@ -1,7 +1,7 @@
 import { Edit, Minus, Plus, Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/components/ui/button';
-import type { Product } from '@/types';
+import type { Product } from '@/types/index';
 
 interface ProductCardProps {
   product: Product & { image?: string };

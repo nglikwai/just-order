@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Plus, Save, X } from 'lucide-react';
 
 import { Button } from '@/components/components/ui/button';
-import type { Product } from '@/types';
+import type { Product } from '@/types/index';
 
 interface AddProductFormProps {
   onAdd: (product: Omit<Product, 'id'>) => void;

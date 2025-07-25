@@ -1,4 +1,4 @@
-import type { Product } from '@/types';
+import type { Product } from '@/types/index';
 
 // Simulate fetching business data - in real app, this would be from a database
 export async function getBusinessData(businessId: string) {

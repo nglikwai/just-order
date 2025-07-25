@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 import {
@@ -10,7 +12,11 @@ import {
   Star,
 } from 'lucide-react';
 
+import { useT } from '@/lib/client-i18n';
+
 export function HeroSection() {
+  const t = useT('hero');
+
   return (
     <section className='relative px-4 sm:px-6 py-8 overflow-hidden min-h-screen flex items-center'>
       {/* Background Elements */}
@@ -22,6 +28,11 @@ export function HeroSection() {
       </div>
 
       <div className='relative max-w-7xl mx-auto w-full'>
+        {/* Language Switcher */}
+        {/* <div className='absolute top-0 right-0 z-10'>
+          <LanguageSwitcher />
+        </div> */}
+
         <div className='grid md:grid-cols-2 gap-8 lg:gap-16 items-center'>
           {/* Left Column - Content */}
           <div className='text-center lg:text-left'>
@@ -41,7 +52,7 @@ export function HeroSection() {
                 Order
               </span>
               <span className='block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-gray-700 font-medium'>
-                Simple, fast, free
+                {t('title')}
               </span>
             </h1>
 
@@ -50,7 +61,7 @@ export function HeroSection() {
               className='text-base sm:text-lg text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed animate-fadeInUp'
               style={{ animationDelay: '0.2s' }}
             >
-              Beautiful ordering for small businesses. Simple, fast, free.
+              {t('subtitle')}
             </p>
 
             {/* CTA Buttons */}
@@ -63,7 +74,7 @@ export function HeroSection() {
                 className='group bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white px-8 py-4 rounded-2xl font-bold text-lg transform transition-all duration-300 hover:scale-105 shadow-2xl hover:shadow-slate-500/25 flex items-center justify-center relative overflow-hidden'
               >
                 <span className='relative z-10 flex items-center'>
-                  Get Started Free
+                  {t('cta')}
                   <ArrowRight className='ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200' />
                 </span>
                 <div className='absolute inset-0 bg-gradient-to-r from-slate-500 to-slate-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left' />

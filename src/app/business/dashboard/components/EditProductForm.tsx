@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Edit, Save, Trash2, X } from 'lucide-react';
 
 import { Button } from '@/components/components/ui/button';
-import type { Product } from '@/types';
+import type { Product } from '@/types/index';
 
 interface EditProductFormProps {
   product: Product;

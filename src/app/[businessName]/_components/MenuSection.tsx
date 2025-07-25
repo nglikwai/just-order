@@ -1,6 +1,6 @@
 import { MenuClient } from './MenuClient';
 
-import type { Product } from '@/types';
+import type { Product } from '@/types/index';
 
 interface MenuSectionProps {
   products: Product[];

@@ -1,6 +1,6 @@
 import { Clock } from 'lucide-react';
 
-import { OrderStatus } from './OrderStatusCard';
+import { OrderStatus } from '@/types/order';
 
 interface EstimatedTimeProps {
   status: OrderStatus;

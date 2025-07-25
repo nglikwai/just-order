@@ -9,8 +9,7 @@ import { CheckoutForm } from './menu/CheckoutForm';
 import { EmptyCart } from './menu/EmptyCart';
 import { HeroSection } from './menu/HeroSection';
 import { ProductCard } from './menu/ProductCard';
-
-import type { CartItem, CustomerInfo, Product } from '@/types';
+import type { CartItem, CustomerInfo, Product } from './menu/types';
 
 interface CustomerMenuClientProps {
   businessName: string;

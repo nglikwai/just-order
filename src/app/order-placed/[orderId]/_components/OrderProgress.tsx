@@ -1,6 +1,6 @@
 import { CheckCircle } from 'lucide-react';
 
-import { OrderStatus } from './OrderStatusCard';
+import { OrderStatus } from '@/types/order';
 
 interface OrderProgressProps {
   currentStatus: OrderStatus;

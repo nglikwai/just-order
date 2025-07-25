@@ -1,6 +1,6 @@
 import { DollarSign, ShoppingBag, Star, Users } from 'lucide-react';
 
-import type { BusinessStats } from '@/types';
+import type { BusinessStats } from '@/types/index';
 
 interface StatsCardsProps {
   productCount: number;

@@ -1,6 +1,6 @@
 import { CheckCircle, Clock, Package, Utensils } from 'lucide-react';
 
-import type { OrderStatus } from '@/types';
+import type { OrderStatus } from '@/types/index';
 
 interface OrderStatusCardProps {
   status: OrderStatus;

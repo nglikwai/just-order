@@ -8,7 +8,7 @@ import { OrdersHeader } from './components/OrdersHeader';
 import { OrderStats } from './components/OrderStats';
 
 import { Button } from '@/components/components/ui/button';
-import type { Order } from '@/types';
+import type { Order } from '@/types/index';
 
 export default function BusinessOrders() {
   const [orders, setOrders] = useState<Order[]>([

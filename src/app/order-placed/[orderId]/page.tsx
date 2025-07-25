@@ -8,10 +8,10 @@ import { OrderActions } from './_components/OrderActions';
 import { OrderDetails } from './_components/OrderDetails';
 import { OrderNotFound } from './_components/OrderNotFound';
 import { OrderProgress } from './_components/OrderProgress';
-import { OrderStatus, OrderStatusCard } from './_components/OrderStatusCard';
+import { OrderStatusCard } from './_components/OrderStatusCard';
 import { SuccessHeader } from './_components/SuccessHeader';
 
-import type { Order } from '@/types';
+import type { Order, OrderStatus } from '@/types/index';
 
 interface ExtendedOrder extends Order {
   businessName: string;

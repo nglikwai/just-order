@@ -37,4 +37,5 @@ export interface BusinessStats {
   totalOrders: number;
   totalRevenue: number;
   avgOrderValue: number;
+  customersThisMonth: number;
 }

@@ -4,7 +4,7 @@ import { Edit } from 'lucide-react';
 
 import { EditProductForm } from './EditProductForm';
 
-import type { Product } from '@/types';
+import type { Product } from '@/types/index';
 
 interface ProductCardProps {
   product: Product;
